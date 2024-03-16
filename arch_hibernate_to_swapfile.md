@@ -16,7 +16,7 @@ echo "/swapfile none swap defaults 0 0" | sudo tee --append /etc/fstab
 
 **Add `resume` to init hooks after `udev`:**
 ```sh
-sudo sed -i 's/\(HOOKS="[^"]*udev \)\(.*\)$/\1resume \2/' /etc/mkinitcpio.conf \
+sudo sed -i 's/\(HOOKS=([^"]*udev \)\(.*\)$/\1resume \2/' /etc/mkinitcpio.conf \
     && sudo mkinitcpio -P
 ```
 
