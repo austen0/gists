@@ -1,9 +1,9 @@
-For modern memory capacities (8GB+), swap file should be 1.5x the size. This
+For modern memory capacities (8GB+), swap file should be RAM+sqrt(RAM) the size. This
 example assumes 16GB.
 
 **Create the swap file and enable it:**
 ```sh
-sudo dd if=/dev/zero of=/swapfile bs=1M count=24000 status=progress \
+sudo dd if=/dev/zero of=/swapfile bs=1M count=20000 status=progress \
     && sudo chmod 600 /swapfile \
     && sudo mkswap /swapfile \
     && sudo swapon /swapfile
