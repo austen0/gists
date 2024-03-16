@@ -11,13 +11,13 @@ sudo dd if=/dev/zero of=/swapfile bs=1M count=20000 status=progress \
 
 **Update swapfile fstab:**
 ```sh
-sudo echo "/swapfile none swap defaults 0 0" >> /etc/fstab
+echo "/swapfile none swap defaults 0 0" | sudo tee --append /etc/fstab
 ```
 
 **Add `resume` to init hooks after `udev`:**
 ```sh
 sudo sed -i 's/\(HOOKS="[^"]*udev \)\(.*\)$/\1resume \2/' /etc/mkinitcpio.conf \
-    && sudo mkinitcpio
+    && sudo mkinitcpio -P
 ```
 
 **Add `resume` kernel parameters to grub config:**
@@ -30,5 +30,5 @@ SWAPDEV=$(findmnt -no UUID -T /swapfile) \
 
 **Reduce swappiness:**
 ```sh
-sudo echo "vm.swappiness=10" > /etc/sysctl.d/99-swappiness.conf
+echo "vm.swappiness=10" | sudo tee /etc/sysctl.d/99-swappiness.conf
 ```
