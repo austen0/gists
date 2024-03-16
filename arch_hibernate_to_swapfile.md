@@ -23,7 +23,7 @@ sudo sed -i 's/\(HOOKS="[^"]*udev \)\(.*\)$/\1resume \2/' /etc/mkinitcpio.conf \
 **Add `resume` kernel parameters to grub config:**
 ```sh
 SWAPDEV=$(findmnt -no UUID -T /swapfile) \
-    && SWAPOFFSET=$(sudo filefrag -v /swapfile | awk '$1=="0:" {print substr($4, 1, length($4)-2)}')
+    && SWAPOFFSET=$(sudo filefrag -v /swapfile | awk '$1=="0:" {print substr($4, 1, length($4)-2)}') \
     && sudo sed -i "s/\(GRUB_CMDLINE_LINUX_DEFAULT=\"[^\"]*\)\(\"\)$/\1 resume=UUID=${SWAPDEV} resume_offset=${SWAPOFFSET}\2/" /etc/default/grub \
     && sudo update-grub
 ```
